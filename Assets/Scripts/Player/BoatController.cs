@@ -17,13 +17,8 @@ public class BoatController : MonoBehaviour
     public float turnSmoothTime;
     float turnSmoothVelocity;
 
-    [Header("\t--- Speed and Power")]
+    [Header("\t--- Speed management")]
     public float maxSpeed;
-    public float motorPower;
-
-
-    [Header("\t--- Steering")]
-    public float steerPower;
 
 
 
@@ -58,22 +53,7 @@ public class BoatController : MonoBehaviour
             transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
         }
 
-        // Moving forward
-        if (Input.GetKey(KeyCode.Z))
-            boatRigidbody.AddForceAtPosition(maxSpeed * transform.forward, motor.position);
-        if (Input.GetKey(KeyCode.S))
-            boatRigidbody.AddForceAtPosition(-maxSpeed * transform.forward, motor.position);
-
-        // Steering and rotation
-        var steer = 0;
-        if (Input.GetKey(KeyCode.Q)) // Left steer
-            steer = -1;
-        if(Input.GetKey(KeyCode.D)) // Right steer
-            steer = 1;
-        if (Input.GetKey(KeyCode.Q) && Input.GetKey(KeyCode.D)) // No steer if both are pressed
-            steer = 0;
-
-        motor.SetPositionAndRotation(motor.position, transform.rotation * quarternionStartRotation * Quaternion.Euler(0, 30f * steer, 0));
-        boatRigidbody.AddForceAtPosition(steer * (transform.right * steerPower / 100f), motor.position);
+        // Moves the boat
+        boatRigidbody.AddForceAtPosition((maxSpeed * transform.forward) * movementDirection.magnitude, motor.position);
     }
 }
