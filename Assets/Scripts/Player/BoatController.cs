@@ -9,8 +9,13 @@ public class BoatController : MonoBehaviour
 {
     [Header("\t--- Character General Attributes")]
     public Transform motor;
+    private Transform cameraTransform;
     protected Rigidbody boatRigidbody;
     protected Quaternion quarternionStartRotation;
+
+    [Header("\t--- Camera")]
+    public float turnSmoothTime;
+    float turnSmoothVelocity;
 
     [Header("\t--- Speed and Power")]
     public float maxSpeed;
@@ -29,6 +34,7 @@ public class BoatController : MonoBehaviour
     void Start()
     {
         // Initialize everything
+        cameraTransform = Camera.main.transform;
         boatRigidbody = GetComponent<Rigidbody>();
     }
 
@@ -45,34 +51,29 @@ public class BoatController : MonoBehaviour
 
     void moveBoat(Vector2 movementDirection)
     {
-        var forceDirection = transform.forward;
-        var steer = 0;
+        // If the boat is moving, adapt movement to camera
+        if (movementDirection != Vector2.zero)
+        {
+            float targetRotation = Mathf.Atan2(movementDirection.x, movementDirection.y) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
+            transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
+        }
 
-        // Steering
-        if(Input.GetKey(KeyCode.Q)) // Left steer
+        // Moving forward
+        if (Input.GetKey(KeyCode.Z))
+            boatRigidbody.AddForceAtPosition(maxSpeed * transform.forward, motor.position);
+        if (Input.GetKey(KeyCode.S))
+            boatRigidbody.AddForceAtPosition(-maxSpeed * transform.forward, motor.position);
+
+        // Steering and rotation
+        var steer = 0;
+        if (Input.GetKey(KeyCode.Q)) // Left steer
             steer = -1;
         if(Input.GetKey(KeyCode.D)) // Right steer
             steer = 1;
         if (Input.GetKey(KeyCode.Q) && Input.GetKey(KeyCode.D)) // No steer if both are pressed
             steer = 0;
 
-        // Rotation
-        boatRigidbody.AddForceAtPosition(steer * transform.right * steerPower / 100f, motor.position);
-
-        // Forward input
-        var movingDir = Vector3.Scale(new Vector3(1, 0, 1), transform.forward);
-
-        if(Input.GetKey(KeyCode.Z))
-            PhysicsHelper.ApplyForceToReachVelocity(boatRigidbody, movingDir * maxSpeed, motorPower, ForceMode.Acceleration);
-        if(Input.GetKey(KeyCode.S))
-            PhysicsHelper.ApplyForceToReachVelocity(boatRigidbody, movingDir * - maxSpeed, motorPower, ForceMode.Acceleration);
-
         motor.SetPositionAndRotation(motor.position, transform.rotation * quarternionStartRotation * Quaternion.Euler(0, 30f * steer, 0));
-
-        // Is moving forward ?
-        bool movingForward = Vector3.Cross(transform.forward, boatRigidbody.velocity).y < 0;
-
-        // Move in direction
-        boatRigidbody.velocity = Quaternion.AngleAxis(Vector3.SignedAngle(boatRigidbody.velocity, ((movingForward) ? 1f : 0f) * transform.forward, Vector3.up) * boatRigidbody.drag, Vector3.up) * boatRigidbody.velocity;
+        boatRigidbody.AddForceAtPosition(steer * (transform.right * steerPower / 100f), motor.position);
     }
 }
