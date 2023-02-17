@@ -11,6 +11,6 @@ public class characterCoordinate : MonoBehaviour
     {
        float x = playerTransform.position.x;
        float z = playerTransform.position.z;
-       textMeshProUGUI.text = "X: " + x + " Z: " + z ;
+       textMeshProUGUI.text = "X: " + (int)x + " Z: " + (int)z ;
     }
 }
