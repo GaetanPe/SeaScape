@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b47376200c11ff498f0acc6e515f00b, type: 3}
-  m_Name: Objective n0
+  m_Name: Objective n1
   m_EditorClassIdentifier: 
-  objectiveName: Kill one enemy
-  goldReward: 10
-  beforeEnd: 120
+  objectiveName: 'Collect 20 gold '
+  goldReward: 0
+  beforeEnd: 60
