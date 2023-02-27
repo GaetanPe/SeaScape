@@ -4,8 +4,8 @@ using UnityEngine;
 public class Item : ScriptableObject
 {
     [Header("\t--- Item attributes")]
-    new public string name = "Default Item";    // Name of the item
-    public Sprite icon = null;              // Item icon
+    new public string name = "Default Item";
+    public Sprite icon = null;
     public bool showInInventory = true;
 
     /**
@@ -17,7 +17,7 @@ public class Item : ScriptableObject
     }
 
     /**
-     * Removes the item rom the inventory
+     * Removes the item from the inventory
      */
     public void removeFromInventory()
     {
