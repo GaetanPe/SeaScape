@@ -1,5 +1,9 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+//using System.Diagnostics;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
 
 public class BoatController : MonoBehaviour
 {
@@ -7,6 +11,7 @@ public class BoatController : MonoBehaviour
     public Transform motor;
     private Transform cameraTransform;
     protected Rigidbody boatRigidbody;
+    protected Quaternion quarternionStartRotation;
 
     [Header("\t--- Camera")]
     public float turnSmoothTime;
@@ -31,9 +36,6 @@ public class BoatController : MonoBehaviour
 
     void Update()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
-            return;
-
         // Input
         Vector2 movementDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
