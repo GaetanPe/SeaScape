@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b47376200c11ff498f0acc6e515f00b, type: 3}
   m_Name: Objective n1
   m_EditorClassIdentifier: 
-  objectiveName: 'Collect 20 gold '
+  objectiveName: Collect 20 coins
   goldReward: 0
-  beforeEnd: 60
+  beforeEnd: 120
+  isComplete: 0
