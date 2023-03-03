@@ -7,11 +7,11 @@ public class Inventory : MonoBehaviour
 
     #region Singleton
 
-    public static Inventory instance;
+    public static Inventory inventoryInstance;
 
     void Awake()
     {
-        instance = this;
+        inventoryInstance = this;
     }
 
     #endregion

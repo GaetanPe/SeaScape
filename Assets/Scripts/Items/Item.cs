@@ -15,12 +15,4 @@ public class Item : ScriptableObject
     {
         
     }
-
-    /**
-     * Removes the item from the inventory
-     */
-    public void removeFromInventory()
-    {
-        Inventory.instance.removeItem(this);
-    }
 }

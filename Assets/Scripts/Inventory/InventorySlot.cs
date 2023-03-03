@@ -32,7 +32,7 @@ public class InventorySlot : MonoBehaviour
 
     public void onDeleteButtonPressed()
     {
-        Inventory.instance.removeItem(item);
+        Inventory.inventoryInstance.removeItem(item);
     }
 
     public void useItem()
