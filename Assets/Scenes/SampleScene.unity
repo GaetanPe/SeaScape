@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0.65080994, g: 0.666729, b: 0.7075472, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.05
@@ -607,6 +607,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 500231908}
   m_CullTransparentMesh: 1
+--- !u!1 &606773837
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 606773838}
+  - component: {fileID: 606773839}
+  m_Layer: 0
+  m_Name: ObjectiveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &606773838
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606773837}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &606773839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606773837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22b15eb44facb4d4a99d65538df61f63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectiveObjects:
+  - {fileID: 11400000, guid: 4e6a9c6beb3592348909e63fb590a650, type: 2}
+  - {fileID: 11400000, guid: 36a574607fb82b048bd3a52115b0e8f4, type: 2}
+  objectiveText: {fileID: 1324952335}
+  currentObjective: {fileID: 0}
 --- !u!1 &653260035
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,6 +856,7 @@ GameObject:
   - component: {fileID: 1324952334}
   - component: {fileID: 1324952336}
   - component: {fileID: 1324952335}
+  - component: {fileID: 1324952337}
   m_Layer: 5
   m_Name: currentObjective
   m_TagString: Untagged
@@ -831,7 +880,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -99.399994, y: -204}
+  m_AnchoredPosition: {x: -99.399994, y: -192.3}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1324952335
@@ -917,7 +966,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 59.21808, y: 0, z: 0, w: 0}
+  m_margin: {x: 55.356995, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -931,6 +980,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1324952333}
   m_CullTransparentMesh: 1
+--- !u!114 &1324952337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1324952333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 065134061c2b5bb4b86656159d2728a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 606773839}
+  objectiveText: {fileID: 1324952335}
 --- !u!1 &1456115153
 GameObject:
   m_ObjectHideFlags: 0
@@ -1056,7 +1119,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 53
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: f0d9520aabd08b24c9484ddf516c9e2a, type: 2}
   m_TargetDisplay: 0
