@@ -9,4 +9,24 @@ public class ObjectiveObject : ScriptableObject
     public int goldReward;
     public float beforeEnd;
     public bool isComplete;
+    public int requiredCount;
+    public int count = 0;
+    public EObjectiveType objectiveType = EObjectiveType.None;
+    public bool IsComplete()
+    {
+        if (count >= requiredCount) 
+        {
+            isComplete= true;
+            count=0;
+        }
+        return isComplete;
+    }
+
+
+    public enum EObjectiveType 
+    {
+        None,
+        Kill,
+        Coins
+    }
 }

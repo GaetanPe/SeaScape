@@ -653,6 +653,8 @@ MonoBehaviour:
   objectiveObjects:
   - {fileID: 11400000, guid: 4e6a9c6beb3592348909e63fb590a650, type: 2}
   - {fileID: 11400000, guid: 36a574607fb82b048bd3a52115b0e8f4, type: 2}
+  objectiveText: {fileID: 1324952335}
+  currentObjective: {fileID: 0}
 --- !u!1 &653260035
 GameObject:
   m_ObjectHideFlags: 0
@@ -878,7 +880,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -99.399994, y: -204}
+  m_AnchoredPosition: {x: -99.399994, y: -192.3}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1324952335
@@ -911,7 +913,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 1, g: 0.995283, b: 0.995283, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -964,7 +966,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 59.21808, y: 0, z: 0, w: 0}
+  m_margin: {x: 55.356995, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1117,7 +1119,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 53
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: f0d9520aabd08b24c9484ddf516c9e2a, type: 2}
   m_TargetDisplay: 0
