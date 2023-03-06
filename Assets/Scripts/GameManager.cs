@@ -18,4 +18,15 @@ public class GameManager : MonoBehaviour
 
     [Header("\t--- Player")]
     public GameObject player;
+
+
+
+    public Compo accessBoatComponent<Compo>()
+    {
+        return playerInstance.player.GetComponent<Compo>();
+    }
+    public Compo accessBoatChildComponent<Compo>()
+    {
+        return playerInstance.player.GetComponentInChildren<Compo>();
+    }
 }

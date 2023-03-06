@@ -10,7 +10,7 @@ public class VolcaronaItem : Item
      * Calls item function
      */
     override
-    public void use()
+    public void onItemUse()
     {
         Debug.Log("I clicked on Volcarona");
     }

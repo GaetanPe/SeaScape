@@ -9,9 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b0f0c4fcbc4b1441ba39100a218ea55, type: 3}
-  m_Name: Test
+  m_Script: {fileID: 11500000, guid: 122bc5892718a0d41a416ad399774b07, type: 3}
+  m_Name: SpeedBoostTest
   m_EditorClassIdentifier: 
-  name: Default Item
+  name: Speed Boost
   icon: {fileID: 0}
   showInInventory: 1
+  quantity: 0
+  activeTime: 3
+  newMaxSpeed: 20

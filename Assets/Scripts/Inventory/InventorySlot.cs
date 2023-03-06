@@ -38,6 +38,6 @@ public class InventorySlot : MonoBehaviour
     public void useItem()
     {
         if (item != null)
-            item.use();
+            item.onItemUse();
     }
 }

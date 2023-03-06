@@ -20,10 +20,10 @@ public class CameraController : MonoBehaviour
     float pitch; // X axis rotation
 
     [Header("\t--- Max angle rotation")]
-    public Vector2 pitchMinMax = new Vector2(-60, 85);
+    public Vector2 pitchMinMax;
 
     [Header("\t--- Camera Smoothing")]
-    public float rotationSmoothTime = .1f;
+    public float rotationSmoothTime;
     Vector3 rotationSmoothVelocity;
     Vector3 currentRotation;
 

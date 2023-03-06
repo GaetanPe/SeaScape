@@ -10,8 +10,8 @@ public class TestItem : Item
      * Calls item function
      */
     override
-    public void use()
+    public void onItemUse()
     {
-        Debug.Log("I picked up a TestItem");
+        Debug.Log("I used a TestItem");
     }
 }

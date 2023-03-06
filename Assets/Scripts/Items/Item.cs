@@ -7,11 +7,12 @@ public class Item : ScriptableObject
     new public string name = "Default Item";
     public Sprite icon = null;
     public bool showInInventory = true;
+    public int quantity = 0;
 
     /**
      * Calls item function (to be overridden)
      */
-    public virtual void use()
+    public virtual void onItemUse()
     {
         
     }
