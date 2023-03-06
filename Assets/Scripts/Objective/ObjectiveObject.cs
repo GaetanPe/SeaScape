@@ -14,7 +14,7 @@ public class ObjectiveObject : ScriptableObject
     public EObjectiveType objectiveType = EObjectiveType.None;
     public bool IsComplete()
     {
-        if (count >= requiredCount) 
+        if (count >= requiredCount || beforeEnd <=0) 
         {
             isComplete= true;
             count=0;

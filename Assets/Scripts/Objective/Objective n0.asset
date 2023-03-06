@@ -16,5 +16,6 @@ MonoBehaviour:
   goldReward: 10
   beforeEnd: 120
   isComplete: 0
-  requiredKillCount: 1
-  requiredCoinCount: 0
+  requiredCount: 2
+  count: 0
+  objectiveType: 0

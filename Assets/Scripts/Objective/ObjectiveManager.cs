@@ -26,6 +26,7 @@ public class ObjectiveManager : Singleton<ObjectiveManager>
     {
         if (currentObjective.IsComplete())
         {
+            UpdateObjective(currentObjective);
             currentObjective.isComplete = false;
             currentObjective = GetCurrentObjective();
             UpdateObjectiveUI();
@@ -37,12 +38,11 @@ public class ObjectiveManager : Singleton<ObjectiveManager>
         objectiveObjects.Add(objective);
     }
 
-    void UpdateObjective(ObjectiveObject objective, string name, int goldReward ,float beforeEnd, bool isComplete)
+    void UpdateObjective(ObjectiveObject objective)
     {
-        objective.objectiveName = name;
-        objective.goldReward = goldReward;
-        objective.beforeEnd = beforeEnd;
-        objective.isComplete = isComplete;
+
+        objective.requiredCount = (int)UnityEngine.Random.Range(1, 10);
+        objective.beforeEnd = (int)UnityEngine.Random.Range(60, 180);
     }
 
     void UpdateObjectiveUI()
