@@ -1,38 +1,32 @@
-using System;
+
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item/SpeedBoost Item")]
 public class SpeedBoostItem : Item
 {
+    #region Attributes
+
     public float activeTime;
     public float newMaxSpeed;
 
     private float oldSpeed = 0;
     private float boostStart = 0;
 
-    private event Action boostTime = null;
+    #endregion
 
-
-    void OnEnable()
-    {
-        boostTime?.Invoke();
-    }
-
-
+    #region Item use
 
     public override void onItemUse()
     {
         Inventory.inventoryInstance.removeItem(this);
 
-        boostTime -= use;
-        boostTime += use;
+        ItemManager.Instance.AitemsUse+= use;
 
         oldSpeed = GameManager.playerInstance.accessBoatComponent<BoatController>().maxSpeed;
         boostStart = Time.time;
 
         GameManager.playerInstance.accessBoatComponent<BoatController>().maxSpeed = newMaxSpeed;
     }
-
 
     /**
      * Calls item function
@@ -42,7 +36,9 @@ public class SpeedBoostItem : Item
         if(Time.time >= boostStart + activeTime)
         {
             GameManager.playerInstance.accessBoatComponent<BoatController>().maxSpeed = oldSpeed;
-            boostTime -= use;
+            ItemManager.Instance.AitemsUse -= use;
         } 
     }
+
+    #endregion
 }

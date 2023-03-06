@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-
-    #region Singleton
+    #region Inventory Singleton
 
     public static Inventory inventoryInstance;
 
@@ -16,6 +15,9 @@ public class Inventory : MonoBehaviour
 
     #endregion
 
+
+    #region Attributes
+
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
 
@@ -23,6 +25,11 @@ public class Inventory : MonoBehaviour
 
     [Header("\t--- Inventory items")]
     public List<Item> inventoryItems = new List<Item>();
+
+    #endregion
+
+
+    #region Add/Remove from inventory
 
     /**
      * Adds the item in the inventory if there is enough room
@@ -39,8 +46,7 @@ public class Inventory : MonoBehaviour
 
             inventoryItems.Add(item);
 
-            if(onItemChangedCallback != null)
-                onItemChangedCallback.Invoke();
+            onItemChangedCallback?.Invoke();
         }
     }
 
@@ -51,7 +57,8 @@ public class Inventory : MonoBehaviour
     {
         inventoryItems.Remove(item);
 
-        if(onItemChangedCallback != null)
-            onItemChangedCallback.Invoke();
+        onItemChangedCallback?.Invoke();
     }
+
+    #endregion
 }

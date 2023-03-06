@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    #region PlayerSingleton
+    #region Player Singleton
 
     // Returns player's and inventory's instances
     public static GameManager playerInstance;
@@ -16,10 +16,16 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
+
+    #region Attributes (Player GameObject)
+
     [Header("\t--- Player")]
     public GameObject player;
 
+    #endregion
 
+
+    #region Boat Component Accesses
 
     public Compo accessBoatComponent<Compo>()
     {
@@ -29,4 +35,6 @@ public class GameManager : MonoBehaviour
     {
         return playerInstance.player.GetComponentInChildren<Compo>();
     }
+
+    #endregion
 }

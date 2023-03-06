@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    #region Attributes
+
     [Header("\t--- Mouse Sensivity")]
     public float mouseSensivity;
     public Transform target;
@@ -27,6 +29,10 @@ public class CameraController : MonoBehaviour
     Vector3 rotationSmoothVelocity;
     Vector3 currentRotation;
 
+    #endregion
+
+
+    #region Update functions
 
     void Update()
     {
@@ -50,10 +56,17 @@ public class CameraController : MonoBehaviour
         transform.position = target.position - (transform.forward * currentZoom);
     }
 
+    #endregion
+
+
+    #region Camera controls
+
     // Controls the camera zoom thanks to the mouse's scrollwheel
     void zoomControl()
     {
         currentZoom -= Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
         currentZoom = Mathf.Clamp(currentZoom, minZoom, maxZoom);
     }
+
+    #endregion
 }

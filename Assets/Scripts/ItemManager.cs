@@ -1,31 +1,29 @@
 using UnityEngine;
+using System;
+using Engine.Utils;
 
-public class ItemManager : MonoBehaviour
+public class ItemManager : Singleton<ItemManager>
 {
     #region ItemSingleton
+    private event Action itemsUse = null;
+    public event Action AitemsUse
+    {
+        add { itemsUse -= value; itemsUse += value; }
+        remove { itemsUse -= value; }
+    }
 
-    public static ItemManager itemManagerInstance;
+        //public static ItemManager itemManagerInstance;
 
-    void Awake()
+   /* void Awake()
     {
         itemManagerInstance = this;
-    }
+    }*/
 
     #endregion
 
-    public GameObject itemManager;
-
-    void Update()
+    protected override void Update()
     {
-        SpeedBoostItem sbi = (SpeedBoostItem) findItem("SpeedTestItem");
-        sbi.onItemUse();
-    }
-
-
-
-
-    public Item findItem(string itemName)
-    {
-        return GameObject.Find(itemName).GetComponent<InteractableItem>().item;
+        base.Update();
+        itemsUse?.Invoke();
     }
 }

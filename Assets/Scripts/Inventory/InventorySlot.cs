@@ -3,12 +3,19 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
+    #region Attributes
+
     [Header("\t--- Image icon")]
     public Image icon;
     public Button deleteButton;
 
     [Header("\t--- Item")]
     Item item;
+
+    #endregion
+
+
+    #region Adding/Clearing/Using Slot
 
     public void addItem(Item newItem)
     {
@@ -40,4 +47,6 @@ public class InventorySlot : MonoBehaviour
         if (item != null)
             item.onItemUse();
     }
+
+    #endregion
 }

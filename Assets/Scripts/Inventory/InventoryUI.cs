@@ -2,11 +2,18 @@ using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
+    #region Attributes
+
     public Transform itemsParent;
     public GameObject inventoryUI;
 
     Inventory inventory;
 
+    #endregion
+
+
+
+    #region Start/Update
 
     void Start()
     {
@@ -24,6 +31,10 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
+    #endregion
+
+
+    #region Update UI
 
     void updateUI()
     {
@@ -37,4 +48,6 @@ public class InventoryUI : MonoBehaviour
                 slots[i].clearSlot();
         }
     }
+
+    #endregion
 }
