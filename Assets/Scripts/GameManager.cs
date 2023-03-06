@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     #region PlayerSingleton
 
-    // Returnns player's and inventory's instances
+    // Returns player's and inventory's instances
     public static GameManager playerInstance;
 
     void Awake()
@@ -16,13 +16,6 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    [Header("\t--- Instances")]
+    [Header("\t--- Player")]
     public GameObject player;
-
-
-
-
-
-
-
 }
