@@ -17,7 +17,7 @@ public class SettingsMenu : MonoBehaviour
     {
         settings.SetActive(false);
 
-        resolutions = Screen.resolutions.Select(resolution => new Resolution { width = resolution.width, height = resolution.height }).Distinct().ToArray();
+        resolutions = Screen.resolutions;
         resolutionDropdown.ClearOptions();
 
         List<string> options = new List<string>();
@@ -48,14 +48,8 @@ public class SettingsMenu : MonoBehaviour
     public void ResolutionIndex(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
-        if (Screen.fullScreen != true)
-        {
-            Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-        }
-        else
-        {
-            Screen.SetResolution(Screen.width, Screen.height, true);
-        }
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+
     }
 
     public void ClosedSetting()
