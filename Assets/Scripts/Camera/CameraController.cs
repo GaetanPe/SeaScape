@@ -41,6 +41,16 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
+        cameraPlayerFollow();
+    }
+
+    #endregion
+
+
+    #region Camera Controls
+
+    void cameraPlayerFollow()
+    {
         // Camera rotation angles
         yaw += Input.GetAxis("Mouse X") * mouseSensivity;
         pitch -= Input.GetAxis("Mouse Y") * mouseSensivity;
@@ -48,18 +58,13 @@ public class CameraController : MonoBehaviour
 
         // Stocks current camera rotation
         currentRotation = Vector3.SmoothDamp(currentRotation, new Vector3(pitch, yaw), ref rotationSmoothVelocity, rotationSmoothTime);
-
-        Vector3 targetRotation = new Vector3(pitch, yaw);
         transform.eulerAngles = currentRotation;
 
         // Stick the camera to the target focus (the player)
         transform.position = target.position - (transform.forward * currentZoom);
     }
 
-    #endregion
 
-
-    #region Camera controls
 
     // Controls the camera zoom thanks to the mouse's scrollwheel
     void zoomControl()
