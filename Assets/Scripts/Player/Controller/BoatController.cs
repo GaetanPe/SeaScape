@@ -1,17 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-//using System.Diagnostics;
 using UnityEngine;
-using UnityEngine.Rendering;
+using UnityEngine.EventSystems;
 
 public class BoatController : MonoBehaviour
 {
+    #region Attributes
+
     [Header("\t--- Character General Attributes")]
     public Transform motor;
     private Transform cameraTransform;
     protected Rigidbody boatRigidbody;
-    protected Quaternion quarternionStartRotation;
+    private ParticleSystem waterParticles;
 
     [Header("\t--- Camera")]
     public float turnSmoothTime;
@@ -20,40 +18,59 @@ public class BoatController : MonoBehaviour
     [Header("\t--- Speed management")]
     public float maxSpeed;
 
+    [Header("\t--- Particles")]
+    private float particleEmission;
+
+    #endregion
 
 
-    /*----------------------------------------------------------------------------------------*/
-    /*                                       Functions                                        */
-    /*----------------------------------------------------------------------------------------*/
+    #region Start/Update
 
     void Start()
     {
         // Initialize everything
         cameraTransform = Camera.main.transform;
         boatRigidbody = GetComponent<Rigidbody>();
+
+        // Initialize water particles and stops at the start
+        waterParticles = GetComponentInChildren<ParticleSystem>();
+        particleEmission = waterParticles.emissionRate;
     }
 
 
     void Update()
     {
-        // Input
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
+        // Input and water particles playing if the boat is moving
         Vector2 movementDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
         // Move the boat
         moveBoat(movementDirection);
     }
 
+    #endregion
+
+
+    #region Boat Movement
 
     void moveBoat(Vector2 movementDirection)
     {
-        // If the boat is moving, adapt movement to camera
-        if (movementDirection != Vector2.zero)
+        // If the boat is moving, adapt movement to camera + add water particles
+        if(movementDirection != Vector2.zero)
         {
             float targetRotation = Mathf.Atan2(movementDirection.x, movementDirection.y) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
             transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
+
+            waterParticles.emissionRate = particleEmission;
         }
+        else
+            waterParticles.emissionRate = 0;
 
         // Moves the boat
         boatRigidbody.AddForceAtPosition((maxSpeed * transform.forward) * movementDirection.magnitude, motor.position);
     }
+
+    #endregion
 }
