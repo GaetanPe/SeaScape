@@ -12,7 +12,6 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("SampleScene");
     }
-
     public void SettingsMenu()
     {
         settingsMenu.SetActive(true);
