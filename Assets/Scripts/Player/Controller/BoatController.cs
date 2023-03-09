@@ -26,6 +26,7 @@ public class BoatController : MonoBehaviour
 
     #region Start/Update
 
+    [System.Obsolete]
     void Start()
     {
         // Initialize everything
@@ -37,7 +38,7 @@ public class BoatController : MonoBehaviour
         particleEmission = waterParticles.emissionRate;
     }
 
-
+    [System.Obsolete]
     void Update()
     {
         if (EventSystem.current.IsPointerOverGameObject())
@@ -55,6 +56,7 @@ public class BoatController : MonoBehaviour
 
     #region Boat Movement
 
+    [System.Obsolete]
     void moveBoat(Vector2 movementDirection)
     {
         // If the boat is moving, adapt movement to camera + add water particles

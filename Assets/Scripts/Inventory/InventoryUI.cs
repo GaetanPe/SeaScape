@@ -12,7 +12,6 @@ public class InventoryUI : MonoBehaviour
     #endregion
 
 
-
     #region Start/Update
 
     void Start()
