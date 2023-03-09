@@ -21,7 +21,7 @@ public class ObjectiveManager : Singleton<ObjectiveManager>
         currentObjective = GetCurrentObjective();
 
         // Update the UI to display the current objective
-        objectiveText.text = "Objective: " + currentObjective.objectiveName + "\n" + currentObjective.count + "/" + currentObjective.requiredCount + "\n" + "remaining times: " + currentObjective.beforeEnd;
+        objectiveText.text = "Objective : " + currentObjective.objectiveName + "\n" + currentObjective.count + "/" + currentObjective.requiredCount + "\n" + "Time remaining : " + currentObjective.beforeEnd;
         timer = currentObjective.beforeEnd;
         InvokeRepeating("DecrementTimer", 0, 1f);//used to called the function decrement every 0,2 seconds
 
@@ -44,7 +44,7 @@ public class ObjectiveManager : Singleton<ObjectiveManager>
             timer = currentObjective.beforeEnd;
             UpdateObjectiveUI();
         }
-        objectiveText.text = "Objective: " + currentObjective.objectiveName + "\n" + currentObjective.count + "/" + currentObjective.requiredCount + "\n" + "remaining times: " + timer;
+        objectiveText.text = "Objective : " + currentObjective.objectiveName + "\n" + currentObjective.count + "/" + currentObjective.requiredCount + "\n" + "Time remaining : " + timer;
 
     }
 
@@ -66,7 +66,7 @@ public class ObjectiveManager : Singleton<ObjectiveManager>
 
     void UpdateObjectiveUI()
     {
-        objectiveText.text = "Objective: " + currentObjective.objectiveName + "\n" + currentObjective.count +"/" + currentObjective.requiredCount + "\n" + "remaining times: " + currentObjective.beforeEnd;
+        objectiveText.text = "Objective : " + currentObjective.objectiveName + "\n" + currentObjective.count +"/" + currentObjective.requiredCount + "\n" + "Time remaining : " + currentObjective.beforeEnd;
         
     }
 
