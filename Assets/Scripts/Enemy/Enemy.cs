@@ -1,204 +1,140 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Diagnostics;
 using UnityEngine.Scripting.APIUpdating;
 
 public class Enemy : MonoBehaviour
 {
-    
+
     [SerializeField] private float speedNavigation = 5f;
-    [SerializeField] private float turnSpeed = 3f;
-    [SerializeField] private float health = 10f;
-    [SerializeField] private float damage = 10f;
-    public float startWaitTime = 4;
-    //[SerializeField] private float degats = 5f;
-    [SerializeField] private float radius = 10f;
-    public float angle = 90;
+    [SerializeField] private float turnSpeed = 2.5f;
 
-    public LayerMask playerMask;
-    public LayerMask obstacle;
-    public float meshResolution = 1f;
-    public int edgeIterations = 4;
-    public float edgeDistance = 0.5f;
-
-    public Transform[] waypoints;
-    int currentWaypointIndex;
-
-    Vector3 playerLastPosition = Vector3.zero;
-    Vector3 playerPosition;
-
-    float waitTime;
-    float timeToRotate;
-    bool playerInRange;
-    bool playerNear;
-    bool isPastrol;
-    bool caughtPlayer;
-
-    GameObject player;
-
-    public Transform Target;
+    public Transform player;
     public NavMeshAgent enemy;
+
+    public float chase = 10f;
+    public float lookRadius = 10f;
+
+    public LayerMask whatIsGround, whatIsPlayer;
+
+    public float health;
+
+    //Patrolling
+    public Vector3 walkPoint;
+    bool walkPointSet;
+    public float walkPointRange;
+
+    //Attack
+    public float timeBetweenAttacks;
+    bool alreadyAttacked;
+    public GameObject missile;
+
+    public float sightRange = 2f , attackRange = 5f;
+    public bool playerInSightRange, playerInAttackRange;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        playerPosition = Vector3.zero;
-        isPastrol = true;
-        caughtPlayer = false;
-        playerInRange = false;
-        waitTime = startWaitTime;
-        timeToRotate = turnSpeed;
-
-        currentWaypointIndex = 0;
-
         enemy = GetComponent<NavMeshAgent>();
-
-        enemy.isStopped = false;
-        enemy.speed = speedNavigation;
-        enemy.SetDestination(waypoints[currentWaypointIndex].position);
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        ////Target = GameObject.Find
-        //Vector3 lookPos = player.transform.position - transform.position;
-        //lookPos.y = 0;
-        //Quaternion rotation = Quaternion.LookRotation(lookPos);
-        //transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * turnSpeed);
-        //transform.position += transform.forward * Time.deltaTime * speed;
+        float distance = Vector3.Distance(player.position, transform.position);
 
+        if (distance > chase)
+        {
+            Patroling();
+        }
+        if (distance < chase)
+        {
+            
+            Chasing();
+        }
+        if (distance < attackRange)
+        {
+            Attack();
+        }
     }
 
     private void Chasing()
     {
-        playerNear = false;
-        playerLastPosition = Vector3.zero;
-
-        if(!caughtPlayer)
-        {
-            Move(speedNavigation);
-            enemy.SetDestination(playerPosition);
-        }
-        //if(enemy.remainingDistance <= enemy.stoppingDistance)
-        //{
-        //    if(waitTime <= 0 && !caughtPlayer && Vector3.Distance(transform.position, LayerMask.NameToLayer("Player").transform.position) >= 6f)
-        //    {
-
-        //    }
-        //}
+        enemy.SetDestination(player.position);
     }
 
     private void Patroling()
     {
-        if(playerNear)
+        if (!walkPointSet)
         {
-            if(turnSpeed <= 0)
-            {
-                Move(speedNavigation);
-                LookingPlayer(playerLastPosition);
-            }
-            else
-            {
-                Stop();
-                timeToRotate -= Time.deltaTime;
-            }
+            SearchWalkPoint();
         }
-        else
+
+        if (walkPointSet)
         {
-            playerNear = false;
-            playerLastPosition = Vector3.zero;
-            enemy.SetDestination(waypoints[currentWaypointIndex].position);
-            if(enemy.remainingDistance < enemy.stoppingDistance)
-            {
-                if(waitTime <= 0)
-                {
-                    NextPoint();
-                    Move(speedNavigation);
-                    waitTime = startWaitTime;
-                }
-                else
-                {
-                    Stop();
-                    waitTime -= Time.deltaTime;
-                }
-            }
+            enemy.SetDestination(walkPoint);
+        }
+
+        Vector3 distanceToWalkPoint = transform.position - walkPoint;
+
+        if (distanceToWalkPoint.magnitude < 1f)
+        {
+            walkPointSet = false;
         }
     }
 
-    void Move(float speed)
+    private void SearchWalkPoint()
     {
-        enemy.isStopped = false;
-        enemy.speed = speed;
-    }
+        float randomZ = Random.Range(-walkPointRange, walkPointRange);
+        float randomX = Random.Range(-walkPointRange, walkPointRange);
 
-    void Stop()
-    {
-        enemy.isStopped = true;
-        enemy.speed = 0;
-    }
+        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
 
-    public void NextPoint()
-    {
-        currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;
-        enemy.SetDestination(waypoints[currentWaypointIndex].position);
-    }
-
-    void CautghtPlayer()
-    {
-        caughtPlayer = true;
-    }
-
-    void LookingPlayer(Vector3 player)
-    {
-        enemy.SetDestination(player);
-        if(Vector3.Distance(transform.position, player) <= 0.3)
+        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
         {
-            if(waitTime <= 0)
-            {
-                playerNear = false;
-                Move(speedNavigation);
-                enemy.SetDestination(waypoints[currentWaypointIndex].position);
-                waitTime = startWaitTime;
-                timeToRotate = turnSpeed;
-            }
-            else
-            {
-                Stop();
-                waitTime -= Time.deltaTime;
-            }
+            walkPointSet = true;
         }
     }
 
-    //void EnviromentView()
-    //{
-    //    Collider[] colliPlayer = Physics.OverlapSphere(transform.position, radius, playerMask);
+    private void Attack()
+    {
+        //Enemy attack and doesn't move
+        enemy.SetDestination(transform.position);
 
-    //    for (int i = 0; i < colliPlayer.Length; i++)
-    //    {
-    //        Transform player = colliPlayer[i].transform;
-    //        Vector3 dirToPlayer = (player.position - transform.position).normalized;
-    //        if(Vector3.Angle(transform.forward, dirToPlayer) < angle / 2)
-    //        {
-    //            float dstToPlayer = Vector3.Distance(transform.position, player.position);
+        transform.LookAt(player);
 
-    //             if(!Physics.Raycast(transform.position,dirToPlayer, dstToPlayer, obstacle))
-    //            {
-                    
-    //                isPastrol = false;
+        if (!alreadyAttacked)
+        {
+            Rigidbody rb = Instantiate(missile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
+            rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
+            rb.AddForce(transform.up * 8f, ForceMode.Impulse);
 
-    //            }
-    //             else
-    //            {
-    //                colliPlayer = false;
-    //            }
-    //        }
-    //        if(Vector3.Distance(transform.position, player.position) > radius)
-    //        {
-    //            playerInRange = player.transform.position;
-    //        }
-    //    }
-    //}
+            alreadyAttacked = true;
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+        }
+    }
+
+    private void ResetAttack()
+    {
+        alreadyAttacked = false;
+    }
+
+    private void TakeDamage(int damage)
+    {
+        health -= damage;
+
+        if (health <= 0)
+        {
+            Invoke(nameof(DestroyEnemy), 0.5f);
+        }
+    }
+
+    private void DestroyEnemy()
+    {
+        Destroy(gameObject);
+    }
 }
