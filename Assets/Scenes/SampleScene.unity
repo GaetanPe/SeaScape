@@ -3062,7 +3062,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8526146277486958721, guid: 82c2420c59dddd342b6a3bea371b6ea3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 8526146277486958721, guid: 82c2420c59dddd342b6a3bea371b6ea3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3103,6 +3103,10 @@ PrefabInstance:
     - target: {fileID: 8526146277486958723, guid: 82c2420c59dddd342b6a3bea371b6ea3, type: 3}
       propertyPath: m_IsKinematic
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8526146277486958724, guid: 82c2420c59dddd342b6a3bea371b6ea3, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8526146277486958725, guid: 82c2420c59dddd342b6a3bea371b6ea3, type: 3}
       propertyPath: m_Name
@@ -5154,14 +5158,30 @@ PrefabInstance:
       propertyPath: Target
       value: 
       objectReference: {fileID: 1833722357}
+    - target: {fileID: 6035441985342403167, guid: 7c7a5c0afd31fcb44aedc0c247e99831, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1833722357}
     - target: {fileID: 6035441985539890083, guid: 7c7a5c0afd31fcb44aedc0c247e99831, type: 3}
       propertyPath: Target
+      value: 
+      objectReference: {fileID: 1833722357}
+    - target: {fileID: 6035441985539890083, guid: 7c7a5c0afd31fcb44aedc0c247e99831, type: 3}
+      propertyPath: player
       value: 
       objectReference: {fileID: 1833722357}
     - target: {fileID: 6035441986198262773, guid: 7c7a5c0afd31fcb44aedc0c247e99831, type: 3}
       propertyPath: Target
       value: 
       objectReference: {fileID: 1833722357}
+    - target: {fileID: 6035441986198262773, guid: 7c7a5c0afd31fcb44aedc0c247e99831, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1833722357}
+    - target: {fileID: 6035441986198262773, guid: 7c7a5c0afd31fcb44aedc0c247e99831, type: 3}
+      propertyPath: attackRange
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 6035441986445458969, guid: 7c7a5c0afd31fcb44aedc0c247e99831, type: 3}
       propertyPath: m_Name
       value: LisEnemy
@@ -5212,6 +5232,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6035441986618026739, guid: 7c7a5c0afd31fcb44aedc0c247e99831, type: 3}
       propertyPath: Target
+      value: 
+      objectReference: {fileID: 1833722357}
+    - target: {fileID: 6035441986618026739, guid: 7c7a5c0afd31fcb44aedc0c247e99831, type: 3}
+      propertyPath: player
       value: 
       objectReference: {fileID: 1833722357}
     m_RemovedComponents: []
