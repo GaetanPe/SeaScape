@@ -44,7 +44,7 @@ public class BoatController : MonoBehaviour
         if (EventSystem.current.IsPointerOverGameObject())
             return;
 
-        // Input and water particles playing if the boat is moving
+        // Input
         Vector2 movementDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
         // Move the boat
