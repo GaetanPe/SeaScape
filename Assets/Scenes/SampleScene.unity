@@ -5170,6 +5170,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1833722357}
+    - target: {fileID: 6035441985539890083, guid: 7c7a5c0afd31fcb44aedc0c247e99831, type: 3}
+      propertyPath: attackRange
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 6035441986198262773, guid: 7c7a5c0afd31fcb44aedc0c247e99831, type: 3}
       propertyPath: Target
       value: 
@@ -5238,6 +5242,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1833722357}
+    - target: {fileID: 6035441986618026739, guid: 7c7a5c0afd31fcb44aedc0c247e99831, type: 3}
+      propertyPath: attackRange
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c7a5c0afd31fcb44aedc0c247e99831, type: 3}
 --- !u!114 &1623147445 stripped
